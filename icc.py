@@ -77,13 +77,14 @@ def home():
 @app.route("/moveMotor", methods=["POST"])
 def moveMotor():
     moveAmount = request.form
+    moveInt = int(moveAmount['amount'])
     #print(moveAmount['amount'], moveAmount['action'])
     if 'Up' in moveAmount['action']:
         print('GoingUp')
-        mymotortest.motor_go(False, "Full", moveAmount['amount'], 0.01, False, .05)
+        mymotortest.motor_go(False, "Full",moveInt, 0.01, False, .05)
     elif 'Down' in moveAmount['action']:
         print('GoingDown')
-        mymotortest.motor_go(True, "Full", moveAmount['amount'], 0.01, False, .05)
+        mymotortest.motor_go(True, "Full",moveInt, 0.01, False, .05)
     else:
         print("whoops, mama i'm confused")
     return redirect(request.referrer)
