@@ -1,7 +1,7 @@
 #! /usr/bin/python
 #-*- coding:utf-8 -*-
 from RpiMotorLib import RpiMotorLib
-from flask import Flask, render_template_string, redirect, request
+from flask import Flask, render_template_string, redirect, request, send_from_directory
 
 #define GPIO pins
 GPIO_pins = (14, 15, 18)
@@ -17,7 +17,7 @@ distance = 80
 #Declare an named instance of class pass GPIO pins numbers
 mymotortest = RpiMotorLib.A4988Nema(direction, step, GPIO_pins, "A4988")
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
 #HTML Code
 
@@ -27,7 +27,7 @@ TPL = '''
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <title>DSMtuned Idle Control</title>
     </head>
     <body>
@@ -56,25 +56,29 @@ TPL = '''
 </html>
 '''
 
-@app.route ("/")
-def home ():
+@app.route('/css/<path:path>')
+def send_js(path):
+    return send_from_directory('css', path)
+
+@app.route("/")
+def home():
     return render_template_string (TPL)
 
-@app.route ("/setdistance", methods =["POST"])
+@app.route("/setdistance", methods=["POST"])
 def setdistance ():
     global distance
-    distance = int(request.form["distance"])
     print("set distance to", distance)
+    distance = int(request.form["distance"])
     return redirect(request.referrer)
 
-@app.route("/up", methods =["POST"])
+@app.route("/up", methods=["POST"])
 def up():
     global distance
     print("Move up,", distance, "steps")
     mymotortest.motor_go(False, "Full", distance, 0.01, False, .05)
-    return redirect (request.referrer)
+    return redirect(request.referrer)
 
-@app.route ("/down", methods =["POST"])
+@app.route("/down", methods=["POST"])
 def down():
     global distance
     print("Move down,", distance, "steps")
