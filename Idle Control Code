@@ -34,13 +34,13 @@ TPL = '''
       <div class="container">
         <div class="row" style="padding:10">
           <div class="col-sm-3">
-            <form method="POST" action="up" class="center-block">
-                <button type="submit" class="btn btn-primary btn-lg">IDLE Up</button>
+            <form method="POST" action="down" class="center-block">
+                <button type="submit" class="btn btn-primary btn-lg">IDLE Down</button>
             </form>
           </div>
           <div class="col-sm-3">
-            <form method="POST" action="down" class="center-block">
-                <button type="submit" class="btn btn-primary btn-lg">IDLE Down</button>
+            <form method="POST" action="up" class="center-block">
+                <button type="submit" class="btn btn-primary btn-lg">IDLE Up</button>
             </form>
           </div>
         </div>
