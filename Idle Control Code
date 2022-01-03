@@ -46,9 +46,9 @@ TPL = '''
         </div>
             <form method="POST" action="setdistance">
                 <div class="btn-group-justified" role="group"style="padding:30" >
-                  <button name="distance" type="submit" class="btn btn-secondary btn-lg" value="50">1/4</button>
-                  <button name="distance" type="submit" class="btn btn-secondary btn-lg" value="100">1/2</button>
-                  <button name="distance" type="submit" class="btn btn-secondary btn-lg" value="150">3/4</button>
+                  <button name="distance" type="submit" class="btn btn-secondary btn-lg" value="50">90*</button>
+                  <button name="distance" type="submit" class="btn btn-secondary btn-lg" value="100">180*</button>
+                  <button name="distance" type="submit" class="btn btn-secondary btn-lg" value="200">360*</button>
                 </div>
             </form>
       </div>
